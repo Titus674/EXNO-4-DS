@@ -151,9 +151,10 @@ df_null_sum
 
 
 
-````
+```
 
-# Chi_Square
+ # Chi_Square
+
 categorical_columns = ['JobType', 'EdType', 'maritalstatus', 'occupation', 'relationship', 'race', 'gender', 'nativecountry']
 df[categorical_columns] = df[categorical_columns].astype('category')
 #In feature selection, converting columns to categorical helps certain algorithms
@@ -328,7 +329,6 @@ print(selected_features_anova)
 
 ```
 
-#Index(['age', 'maritalstatus', 'relationship', 'capitalgain', 'hoursperweek'], dtype='object')
 # Wrapper Method
 import pandas as pd
 from sklearn.feature_selection import RFE
@@ -336,23 +336,44 @@ from sklearn.linear_model import LogisticRegression
 df=pd.read_csv("/content/income(1) (1).csv")
 # List of categorical columns
 categorical_columns = [
-'JobType',
-'EdType',
-'maritalstatus',
-'occupation',
-'relationship',
-'race',
-'gender',
-'nativecountry'
+    'JobType',
+    'EdType',
+    'maritalstatus',
+    'occupation',
+    'relationship',
+    'race',
+    'gender',
+    'nativecountry'
 ]
+
 # Convert the categorical columns to category dtype
 df[categorical_columns] = df[categorical_columns].astype('category')
 df[categorical_columns] = df[categorical_columns].apply(lambda x: x.cat.codes)
 df[categorical_columns]
 
+
 ```
 
-<img width="1327" height="532" alt="image" src="https://github.com/user-attachments/assets/6e097d3c-690f-4308-8271-cdaf6ea78be3" />
+<img width="1816" height="786" alt="image" src="https://github.com/user-attachments/assets/25a70587-f8fd-4f95-8873-8f8947a75b54" />
+
+
+```
+
+X = df.drop(columns=['SalStat'])
+y = df['SalStat']
+logreg = LogisticRegression()
+n_features_to_select =6
+rfe = RFE(estimator=logreg, n_features_to_select=n_features_to_select)
+rfe.fit(X, y)
+
+
+```
+
+<img width="1784" height="847" alt="image" src="https://github.com/user-attachments/assets/be4933e5-649e-4a7a-a5e1-8dc2fe216944" />
+
+<img width="1754" height="799" alt="image" src="https://github.com/user-attachments/assets/ccc89cae-bef0-4845-bd41-8b7d94d19dd6" />
+
+
 
               
 
